@@ -16,7 +16,8 @@
             <div
               v-for="(v, j) in lifeGrid[1]"
               :key="lifeGrid[0] * i + j"
-              class="dot"></div>
+              class="dot"
+              v-bind:style="[lifeGrid[0] * i + j > (lifeExpectancy - daysLeft) ? { background: 'red' }: { background: 'grey' }]"></div>
           </div>
         </div>
         <!-- grid past days in grey, future days in red, today -->
@@ -28,11 +29,19 @@
 <script setup lang="ts">
 const appConfig = useAppConfig();
 
-var lifeGrid = [0, 0];
+var lifeGrid = [50, 100];
+var lifeExpectancy = 0; // in weeks
+var weeksLeft = 0;
+
+const setDoB = function () {
+  console.log("dob set")
+}
 
 const loadLifeGrid = function () {
   console.log("life grid loaded from localstorage");
-  lifeGrid = [50, 50];
+  lifeGrid = [50, 100];
+  lifeExpectancy = lifeGrid[0] * lifeGrid[1];
+  weeksLeft = 4510;
 };
 
 onBeforeMount(() => {
