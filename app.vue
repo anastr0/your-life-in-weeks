@@ -1,31 +1,28 @@
 <template>
   <div>
-    <div class="app-container">
-      <div class="wrapper-container">
-        <h1>Your life in Weeks</h1>
-        <div class="grid-container">
-          <div ref="life" class="life-grid">
-            <div
-              v-for="(r, i) in lifeGrid[0]"
-              :key="`r${lifeGrid[0] * (i + 1)}`"
-              class="life-row"
-            >
-              <div
-                v-for="(v, j) in lifeGrid[1]"
-                :key="`r${lifeGrid[0] * (i + 1) + (j + 1)}`"
-                class="week-dot"
-                v-bind:style="[
-                  lifeGrid[1] * i + (j + 1) > lifeExpectancy - weeksLeft
-                    ? { background: 'red' }
-                    : { background: 'grey' },
-                ]"
-              ></div>
-            </div>
-          </div>
-          <!-- grid past days in grey, future days in red, today -->
-        </div>
+    <UContainer class="font-mono text-slate-400 hover:text-slate-300">
+      <div>
+        
+         <UCard>
+          <template #header>
+            <h1 class="text-xl font-bold text-center">Your life in Weeks</h1>
+            <p class="text-center p-4">
+              Inspired from the <a class="text-rose-400 hover:text-rose-500 after:content-['_↗'] ..." href="https://waitbutwhy.com/2014/05/life-weeks.html" target="_blank">wait but why article</a>
+            </p>
+            <UCard>
+              <UButton icon="i-heroicons-arrow-path">calc life</UButton>
+            </UCard>
+            
+          </template>
+          <template #footer>
+            <!-- <Placeholder class="h-8" /> -->
+            <h3>08-06-2024</h3>
+          </template>
+        </UCard>
+        <!-- <button @click="dob=2"></button> -->
+
       </div>
-    </div>
+    </UContainer>
   </div>
 </template>
 
