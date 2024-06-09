@@ -10,7 +10,10 @@
               Inspired from the <a class="text-rose-400 hover:text-rose-500 after:content-['_↗'] ..." href="https://waitbutwhy.com/2014/05/life-weeks.html" target="_blank">wait but why article</a>
             </p>
             <UCard>
-              <UButton icon="i-heroicons-arrow-path">calc life</UButton>
+              <div class="w-full inline-flex justify-center space-x-3">
+                <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" />
+                <UButton icon="i-heroicons-arrow-path">calc life</UButton>
+              </div>
             </UCard>
             
           </template>
@@ -27,11 +30,9 @@
 </template>
 
 <script setup lang="ts">
-const appConfig = useAppConfig();
+import VueDatePicker from '@vuepic/vue-datepicker';
 
-var lifeGrid = [50, 100];
-var lifeExpectancy = 0; // in weeks
-var weeksLeft = 0;
+const date = ref();
 
 const loadLifeGrid = function () {
   console.log("life grid loaded from localstorage");
