@@ -13,6 +13,8 @@
             <UCard class="dob-picker-card">
               <div class="w-full inline-flex justify-center space-x-3">
                 <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" :offset="0" hide-input-icon />
+                <!-- TODO: set `:state="false"` if set date is today or future -->
+                <UButton @click="setWeeksLeft()" icon="i-heroicons-arrow-path">calc life</UButton>
               </div>
             </UCard>
             
@@ -33,12 +35,23 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 
 const appConfig = useAppConfig();
+const date = ref(new Date());  // replace with date pulled from localstorage/ persisted memory
+
+var lifeGrid = [50, 100];
+var lifeExpectancy = 0; // in weeks
+var weeksLeft = 0;
+
+const setWeeksLeft = function () {
+  if (date.value) {
+    lifeGrid = [50, 100];
+    lifeExpectancy = lifeGrid[0] * lifeGrid[1];
+    weeksLeft = 4510;
+  }
+}
 
 const loadLifeGrid = function () {
   console.log("life grid loaded from localstorage");
-  lifeGrid = [50, 100];
-  lifeExpectancy = lifeGrid[0] * lifeGrid[1];
-  weeksLeft = 4510;
+  if (date.value) { setWeeksLeft() }
 };
 
 onBeforeMount(() => {
