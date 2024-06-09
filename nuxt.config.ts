@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-    '~/assets/global.scss',
     '@vuepic/vue-datepicker/dist/main.css'
   ],
   modules: ["@nuxt/ui"]

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-screen flex flex-col justify-center">
     <UContainer class="font-mono text-slate-400 hover:text-slate-300">
       <div>
         
