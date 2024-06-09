@@ -17,15 +17,22 @@
                 <UButton @click="setWeeksLeft()" icon="i-heroicons-arrow-path">calc life</UButton>
               </div>
             </UCard>
-            
           </template>
+          <UCard class="life-grid-card" v-if="lifeExpectancy !== 0">
+            <div class="w-full flex flex-wrap" style="max-width: 90vw">
+              <div 
+                v-for="w in lifeExpectancy"
+                :key="w"
+                class="w-1 h-1 rounded-bl-sm m-[3px]"
+                :class="(w < (lifeExpectancy - weeksLeft)) ? 'bg-gray-500' : 'bg-primary-500'"
+              >
+              </div>
+            </div>
+          </UCard>
           <template #footer>
-            <!-- <Placeholder class="h-8" /> -->
             <h3>{{ date && date || "__-__-____" }}</h3>
           </template>
         </UCard>
-        <!-- <button @click="dob=2"></button> -->
-
       </div>
     </UContainer>
   </div>
@@ -35,22 +42,23 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 
 const appConfig = useAppConfig();
-const date = ref(new Date());  // replace with date pulled from localstorage/ persisted memory
+const date = ref(new Date());  // TODO: replace with date pulled from localstorage/ persisted memory
 
-var lifeGrid = [50, 100];
 var lifeExpectancy = 0; // in weeks
 var weeksLeft = 0;
 
 const setWeeksLeft = function () {
   if (date.value) {
-    lifeGrid = [50, 100];
-    lifeExpectancy = lifeGrid[0] * lifeGrid[1];
+    // TODO: calc diff (today - dob) => no of weeks total
+    // TODO: calc grid, lifeexpectancy
+    lifeExpectancy = 5000;
     weeksLeft = 4510;
   }
 }
 
 const loadLifeGrid = function () {
   console.log("life grid loaded from localstorage");
+  // TODO : set date to value in localstorage if exists
   if (date.value) { setWeeksLeft() }
 };
 
@@ -80,31 +88,5 @@ $default-border-radius: 0.375rem;
   .dp__input_wrap {
     border-radius: $default-border-radius !important;
   }
-}
-
-.grid-container {
-  align-self: center;
-
-  .life-grid {
-    width: fit-content;
-  }
-
-  .life-row {
-    line-height: 0;
-  }
-
-  .week-dot {
-    line-height: 0;
-    border-radius: 50%;
-    width: 0.4rem;
-    height: 0.4rem;
-    margin: 0.1rem;
-    display: inline-flex;
-    flex-direction: column;
-  }
-}
-
-h1 {
-  align-self: center;
 }
 </style>
