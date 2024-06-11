@@ -72,26 +72,3 @@ onBeforeMount(() => {
 });
 </script>
 
-<style lang="scss">
-$default-backdrop-blur: blur(24px);
-$default-backdrop-blur-bg: rgba(255, 255, 255, 0.867);
-$default-border-radius: 0.375rem;
-
-// date picker styles
-.dob-picker-card {
-  .dp__input_wrap {
-    background-color:  $default-backdrop-blur-bg !important;
-  }
-  .dp__overlay,
-  .dp__menu {
-    --tw-backdrop-blur:  $default-backdrop-blur !important;
-    background-color: $default-backdrop-blur-bg !important;
-  }
-  .dp__arrow_top {
-    display: none;
-  }
-  .dp__input_wrap {
-    border-radius: $default-border-radius !important;
-  }
-}
-</style>
