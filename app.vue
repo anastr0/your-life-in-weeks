@@ -23,20 +23,13 @@
               </div>
             </UCard>
           </template>
-          <UCard class="life-grid-card" v-if="lifeExpectancy !== 0">
-            <div class="w-full flex flex-wrap" style="max-width: 90vw">
-              <div 
-                v-for="w in lifeExpectancy"
-                :key="w"
-                class="w-1 h-1 rounded-bl-sm m-[3px]"
-                :class="(w < (lifeExpectancy - weeksLeft)) ? 'bg-gray-500' : 'bg-primary-500'"
-              >
+          <UCard class="life-grid-card">
+            <div class="w-full flex flex-wrap" style="max-width: 95vw">
+              <div v-for="w in lifeExpectancy" :key="w" class="w-1 h-1 rounded-bl-sm m-[3px]"
+                :class="(w - 1 < rweeksPast) ? 'bg-gray-500' : 'bg-primary-500'">
               </div>
             </div>
           </UCard>
-          <template #footer>
-            <h3>{{ date && date || "__-__-____" }}</h3>
-          </template>
         </UCard>
       </div>
     </UContainer>
@@ -44,26 +37,21 @@
 </template>
 
 <script setup lang="ts">
-import VueDatePicker from '@vuepic/vue-datepicker';
+import VueDatePicker from "@vuepic/vue-datepicker";
+import { differenceInCalendarWeeks } from "date-fns";
+import { computed } from "vue";
 
-const appConfig = useAppConfig();
-const date = ref(new Date());  // TODO: replace with date pulled from localstorage/ persisted memory
+const date = ref();  // TODO: replace with date pulled from localstorage/ persisted memory
 
-var lifeExpectancy = 0; // in weeks
-var weeksLeft = 0;
+var lifeExpectancy = 5000; // in weeks
+const rweeksPast = computed(() => {
+  return date.value && differenceInCalendarWeeks(new Date(), date.value) || 5000
+})
 
-const setWeeksLeft = function () {
-  if (date.value) {
-    // TODO: calc diff (today - dob) => no of weeks total
-    // TODO: calc grid, lifeexpectancy
-    lifeExpectancy = 5000;
-    weeksLeft = 4510;
-  }
-}
+const setWeeksLeft = function () { };
 
 const loadLifeGrid = function () {
   console.log("life grid loaded from localstorage");
-  // TODO : set date to value in localstorage if exists
   if (date.value) { setWeeksLeft() }
 };
 
