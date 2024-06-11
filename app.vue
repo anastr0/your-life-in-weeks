@@ -2,15 +2,20 @@
   <div class="h-screen flex flex-col justify-center">
     <UContainer class="font-mono text-slate-400 hover:text-slate-300">
       <div>
-
-        <UCard>
+        <UCard :ui="{
+            body: { padding: 'px-2 py-2 sm:p-2' },
+            header: { padding: 'px-2 py-2 sm:px-2' },
+          }">
           <template #header>
-            <h1 class="text-xl font-bold text-center">Your life in Weeks</h1>
-            <p class="text-center p-4">
-              Inspired from the <a class="text-rose-400 hover:text-rose-500 after:content-['_↗'] ..."
+            <h3 class="text-xl font-bold text-center pt-2">
+              Your life in Weeks
+            </h3>
+            <p class="text-center py-3">
+              Inspired from the
+              <a class="text-rose-400 hover:text-rose-500 after:content-['_↗'] ..."
                 href="https://waitbutwhy.com/2014/05/life-weeks.html" target="_blank">wait but why article</a>
             </p>
-            <UCard class="dob-picker-card">
+            <UCard class="dob-picker-card" :ui="{ body: { padding: 'px-2 py-3 sm:p-3' } }">
               <div class="w-full inline-flex justify-center space-x-3">
                 <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" :offset="0" hide-input-icon />
                 <!-- TODO: set `:state="false"` if set date is today or future -->
