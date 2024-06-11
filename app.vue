@@ -17,9 +17,9 @@
             </p>
             <UCard class="dob-picker-card" :ui="{ body: { padding: 'px-2 py-3 sm:p-3' } }">
               <div class="w-full inline-flex justify-center space-x-3">
-                <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" :offset="0" hide-input-icon />
-                <!-- TODO: set `:state="false"` if set date is today or future -->
-                <UButton @click="setWeeksLeft()" icon="i-heroicons-arrow-path">calc life</UButton>
+                <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" :offset="0"
+                  :text-input="{ format: 'dd.MM.yyyy', enterSubmit: true, rangeSeparator: '/'}" hide-input-icon dark
+                  placeholder="DOB (DD/MM/YYYY)" auto-apply />
               </div>
             </UCard>
           </template>
