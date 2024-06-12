@@ -19,7 +19,7 @@
               <div class="w-full inline-flex justify-center space-x-3">
                 <VueDatePicker class="!w-fit" v-model="date" :enable-time-picker="false" :offset="0"
                   :text-input="{ format: 'dd.MM.yyyy', enterSubmit: true, rangeSeparator: '/'}" hide-input-icon dark
-                  placeholder="DOB (DD/MM/YYYY)" auto-apply />
+                  placeholder="DOB (DD/MM/YYYY)" auto-apply :model-value="date"/>
               </div>
             </UCard>
           </template>
@@ -39,24 +39,22 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import { differenceInCalendarWeeks } from "date-fns";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 
-const date = ref();  // TODO: replace with date pulled from localstorage/ persisted memory
+const date = ref();
+
+watch(date, (oldDate, newDate) => {
+  localStorage.setItem('dob', (oldDate && oldDate.toString() || newDate && newDate.toString()))
+})
 
 var lifeExpectancy = 5000; // in weeks
 const rweeksPast = computed(() => {
   return date.value && differenceInCalendarWeeks(new Date(), date.value) || 5000
 })
 
-const setWeeksLeft = function () { };
-
-const loadLifeGrid = function () {
-  console.log("life grid loaded from localstorage");
-  if (date.value) { setWeeksLeft() }
-};
-
-onBeforeMount(() => {
-  loadLifeGrid();
-});
+onMounted(() => {
+  console.log(date.value)
+  date.value = localStorage.dob && new Date(Date.parse(localStorage.dob)) || null
+})
 </script>
 
